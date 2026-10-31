@@ -1,0 +1,14 @@
+            if sprite.entity: # Assuming only 'entity' sprites have collision logic
+                if sprite.hitbox.collidelist(self.sol) > -1:
+                    if not sprite.saut:
+                        collided_rect = self.sol[sprite.hitbox.collidelist(self.sol)]
+
+                        if sprite.hitbox.bottom  >= collided_rect.top:
+                            sprite.on_ground = True
+                            # Ajuster la position pour éviter de traverser le sol
+                            sprite.hitbox.bottom = collided_rect.top
+                            sprite.position[1] = sprite.hitbox.bottom + 1
+
+                # Collision with 'sol'
+                else:
+                    sprite.on_ground = False
